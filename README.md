@@ -12,10 +12,19 @@ cd donloader
 go install mvdan.cc/garble@latest
 sudo apt install upx
 GO111MODULE=off go get -u golang.org/x/sys/...
-GO111MODULE=off go get -u github.com/C-Sto/BananaPhone
-GO111MODULE=off go get -u github.com/Binject/debug
+GOOS=windows GO111MODULE=on go get -u github.com/C-Sto/BananaPhone
+GOOS=windows GO111MODULE=on go get -u github.com/Binject/debug
+GOOS=windows GO111MODULE=off go get -u github.com/C-Sto/BananaPhone; exit 0
+GOOS=windows GO111MODULE=off go get -u github.com/Binject/debug; exit 0
 GO111MODULE=off go get -u github.com/awgh/rawreader
 go build -o "bin/donloader" .
+```
+
+### Docker
+```
+# calc.exe is in $(pwd)
+docker build -t donloader .
+docker run -it -v $(pwd):/data donloader -tpl bp_ct -payload calc.exe -entropy 3 -g
 ```
 
 ## Usage
